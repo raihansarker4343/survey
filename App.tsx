@@ -162,12 +162,15 @@ const getPageComponent = (pageName: string) => {
 }
 
 const App: React.FC = () => {
-  const path = window.location.pathname;
-  const pathSegments = path.split('/').filter(Boolean);
+  const hash = window.location.hash;
   let dedicatedPageName: string | null = null;
 
-  if ((pathSegments[0] === 'survey' || pathSegments[0] === 'offers') && pathSegments.length === 2) {
-    dedicatedPageName = pathSegments[1];
+  if (hash.startsWith('#/')) {
+    const path = hash.substring(2); // remove '#/' -> e.g., 'survey/Prime'
+    const pathSegments = path.split('/').filter(Boolean);
+    if ((pathSegments[0] === 'survey' || pathSegments[0] === 'offers') && pathSegments.length === 2) {
+      dedicatedPageName = decodeURIComponent(pathSegments[1]);
+    }
   }
   
   const [isLoggedIn, setIsLoggedIn] = useState(() => localStorage.getItem('isLoggedIn') === 'true');

@@ -20,7 +20,7 @@ const LockIcon: React.FC = () => (
 const OfferProviderCard: React.FC<{ provider: OfferProvider }> = ({ provider }) => {
     const handleClick = () => {
         if (!provider.isLocked && provider.pageName) {
-            window.open(`${window.location.origin}/offers/${encodeURIComponent(provider.pageName)}`, '_blank');
+            window.open(`${window.location.origin}/#/offers/${encodeURIComponent(provider.pageName)}`, '_blank');
         }
     };
 

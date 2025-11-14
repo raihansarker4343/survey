@@ -119,7 +119,7 @@ const LoggedInHomePage: React.FC = () => {
                          return (
                             <button
                                 key={index}
-                                onClick={() => wall.pageName && window.open(`${window.location.origin}/offers/${encodeURIComponent(wall.pageName)}`, '_blank')}
+                                onClick={() => wall.pageName && window.open(`${window.location.origin}/#/offers/${encodeURIComponent(wall.pageName)}`, '_blank')}
                                 className={`${commonClasses} hover:bg-cyber-primary/10 cursor-pointer hover:-translate-y-1 hover:border-cyber-primary`}
                             >
                                 {CardContent}
@@ -164,7 +164,7 @@ const LoggedInHomePage: React.FC = () => {
                         return (
                             <button
                                 key={index}
-                                onClick={() => wall.pageName && window.open(`${window.location.origin}/survey/${encodeURIComponent(wall.pageName)}`, '_blank')}
+                                onClick={() => wall.pageName && window.open(`${window.location.origin}/#/survey/${encodeURIComponent(wall.pageName)}`, '_blank')}
                                 className={`${commonClasses} hover:bg-cyber-primary/10 cursor-pointer hover:-translate-y-1 hover:border-cyber-primary`}
                             >
                                 {CardContent}
