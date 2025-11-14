@@ -45,9 +45,6 @@ import AdGemOffersPage from './components/pages/offers/adgem';
 import NotikOffersPage from './components/pages/offers/notik';
 import WannadsOffersPage from './components/pages/offers/wannads';
 import OfferToroOffersPage from './components/pages/offers/offertoro';
-// Game Pages
-import BoxesPage from './components/pages/BoxesPage';
-import BattlesPage from './components/pages/BattlesPage';
 
 export const AppContext = React.createContext<{
   isLoggedIn: boolean;
@@ -163,55 +160,55 @@ const App: React.FC = () => {
       case 'Chat':
         return <div className={pagePadding}><ChatPage /></div>;
       // Survey Pages
-      case 'Prime Surveys':
+      case 'Prime':
         return <div className={pagePadding}><PrimeSurveysPage /></div>;
-      case 'CPX Research':
+      case 'CPX':
         return <div className={pagePadding}><CpxResearchPage /></div>;
-      case 'Adscend Media Surveys':
+      case 'AdscendSurveys':
         return <div className={pagePadding}><AdscendMediaSurveysPage /></div>;
-      case 'BitLabs Surveys':
+      case 'BitLabs':
         return <div className={pagePadding}><BitLabsSurveysPage /></div>;
       case 'inBrain':
         return <div className={pagePadding}><InBrainPage /></div>;
       case 'TheoremReach':
         return <div className={pagePadding}><TheoremReachPage /></div>;
       // Offer Pages
-      case 'Torox Offers':
+      case 'Torox':
         return <div className={pagePadding}><ToroxOffersPage /></div>;
-      case 'Adscend Media Offers':
+      case 'AdscendOffers':
         return <div className={pagePadding}><AdscendMediaOffersPage /></div>;
-      case 'AdToWall Offers':
+      case 'AdToWall':
         return <div className={pagePadding}><AdToWallOffersPage /></div>;
-      case 'RevU Offers':
+      case 'RevU':
         return <div className={pagePadding}><RevUOffersPage /></div>;
-      case 'AdGate Media Offers':
+      case 'AdGateMedia':
         return <div className={pagePadding}><AdGateMediaOffersPage /></div>;
-      case 'MyChips Offers':
+      case 'MyChips':
         return <div className={pagePadding}><MyChipsOffersPage /></div>;
-      case 'MM Wall Offers':
+      case 'MMWall':
         return <div className={pagePadding}><MMWallOffersPage /></div>;
-      case 'Aye-T Studios Offers':
+      case 'AyeTStudios':
         return <div className={pagePadding}><AyeTStudiosOffersPage /></div>;
-      case 'Monlix Offers':
+      case 'Monlix':
         return <div className={pagePadding}><MonlixOffersPage /></div>;
-      case 'Hang My Ads Offers':
+      case 'HangMyAds':
         return <div className={pagePadding}><HangMyAdsOffersPage /></div>;
-      case 'Lootably Offers':
+      case 'Lootably':
         return <div className={pagePadding}><LootablyOffersPage /></div>;
-      case 'Time Wall Offers':
+      case 'TimeWall':
         return <div className={pagePadding}><TimeWallOffersPage /></div>;
-      case 'AdGem Offers':
+      case 'AdGem':
         return <div className={pagePadding}><AdGemOffersPage /></div>;
-      case 'Notik Offers':
+      case 'Notik':
         return <div className={pagePadding}><NotikOffersPage /></div>;
-      case 'Wannads Offers':
+      case 'Wannads':
         return <div className={pagePadding}><WannadsOffersPage /></div>;
-      case 'OfferToro Offers':
+      case 'OfferToro':
         return <div className={pagePadding}><OfferToroOffersPage /></div>;
       case 'Boxes':
-        return <div className={pagePadding}><BoxesPage /></div>;
       case 'Battles':
-        return <div className={pagePadding}><BattlesPage /></div>;
+        // Placeholder for new pages
+        return <div className={`text-cyber-text-primary text-3xl font-bold ${pagePadding}`}>{currentPage} Page</div>;
       default:
         return <div className={pagePadding}><LoggedInHomePage /></div>;
     }
