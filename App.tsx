@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import LoggedOutHeader from './components/LoggedOutHeader';
@@ -45,6 +45,9 @@ import AdGemOffersPage from './components/pages/offers/adgem';
 import NotikOffersPage from './components/pages/offers/notik';
 import WannadsOffersPage from './components/pages/offers/wannads';
 import OfferToroOffersPage from './components/pages/offers/offertoro';
+// Game Pages
+import BoxesPage from './components/pages/BoxesPage';
+import BattlesPage from './components/pages/BattlesPage';
 
 export const AppContext = React.createContext<{
   isLoggedIn: boolean;
@@ -85,16 +88,29 @@ export const AppContext = React.createContext<{
 });
 
 const App: React.FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(() => localStorage.getItem('isLoggedIn') === 'true');
   const [user] = useState<User | null>(MOCK_USER);
   const [balance, setBalance] = useState(125.50);
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
   const [isSigninModalOpen, setIsSigninModalOpen] = useState(false);
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
   const [signupInitialEmail, setSignupInitialEmail] = useState('');
-  const [currentPage, setCurrentPage] = useState('Home');
+  
+  const [currentPage, setCurrentPage] = useState(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('page') || 'Home';
+  });
+
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+        localStorage.setItem('isLoggedIn', 'true');
+    } else {
+        localStorage.removeItem('isLoggedIn');
+    }
+  }, [isLoggedIn]);
 
   const handleLogin = useCallback(() => {
     setIsLoggedIn(true);
@@ -193,9 +209,9 @@ const App: React.FC = () => {
       case 'OfferToro Offers':
         return <div className={pagePadding}><OfferToroOffersPage /></div>;
       case 'Boxes':
+        return <div className={pagePadding}><BoxesPage /></div>;
       case 'Battles':
-        // Placeholder for new pages
-        return <div className={`text-cyber-text-primary text-3xl font-bold ${pagePadding}`}>{currentPage} Page</div>;
+        return <div className={pagePadding}><BattlesPage /></div>;
       default:
         return <div className={pagePadding}><LoggedInHomePage /></div>;
     }

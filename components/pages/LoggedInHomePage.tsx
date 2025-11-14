@@ -44,8 +44,6 @@ const StarIcon: React.FC = () => (
 );
 
 const LoggedInHomePage: React.FC = () => {
-    const { setCurrentPage } = useContext(AppContext);
-
     return (
         <div className="space-y-12">
             {/* Top Banners */}
@@ -121,7 +119,7 @@ const LoggedInHomePage: React.FC = () => {
                          return (
                             <button
                                 key={index}
-                                onClick={() => wall.pageName && setCurrentPage(wall.pageName)}
+                                onClick={() => wall.pageName && window.open(`${window.location.origin}${window.location.pathname}?page=${encodeURIComponent(wall.pageName)}`, '_blank')}
                                 className={`${commonClasses} hover:bg-cyber-primary/10 cursor-pointer hover:-translate-y-1 hover:border-cyber-primary`}
                             >
                                 {CardContent}
@@ -166,7 +164,7 @@ const LoggedInHomePage: React.FC = () => {
                         return (
                             <button
                                 key={index}
-                                onClick={() => wall.pageName && setCurrentPage(wall.pageName)}
+                                onClick={() => wall.pageName && window.open(`${window.location.origin}${window.location.pathname}?page=${encodeURIComponent(wall.pageName)}`, '_blank')}
                                 className={`${commonClasses} hover:bg-cyber-primary/10 cursor-pointer hover:-translate-y-1 hover:border-cyber-primary`}
                             >
                                 {CardContent}

@@ -2,12 +2,10 @@ import React, { useContext } from 'react';
 import { AppContext } from '../../../App';
 
 const NotikOffersPage: React.FC = () => {
-    const { setCurrentPage } = useContext(AppContext);
-
     return (
         <div className="space-y-8">
             <div className="flex items-center gap-4">
-                 <button onClick={() => setCurrentPage('Offer')} className="cyber-button-primary !py-2 !px-3">
+                 <button onClick={() => window.close()} className="cyber-button-primary !py-2 !px-3">
                     <i className="fas fa-arrow-left"></i>
                 </button>
                 <div>

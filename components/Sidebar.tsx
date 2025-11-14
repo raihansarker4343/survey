@@ -1,13 +1,18 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../App';
 import type { SidebarMenuItem } from '../types';
-import { HomeIcon, EarnIcon, TaskIcon, SurveyIcon, RewardIcon, AffiliateIcon, BlogIcon, GuideIcon, SupportIcon, LeaderboardIcon, DailyBonusIcon, AchievementIcon, ChatIcon } from './icons/SidebarIcons';
+import { HomeIcon, EarnIcon, TaskIcon, SurveyIcon, RewardIcon, AffiliateIcon, BlogIcon, GuideIcon, SupportIcon, LeaderboardIcon, DailyBonusIcon, AchievementIcon, ChatIcon, BoxIcon, SwordIcon } from './icons/SidebarIcons';
 
 const SIDEBAR_MENU_ITEMS_TOP: SidebarMenuItem[] = [
   { name: 'Home', icon: <HomeIcon /> },
   { name: 'Offer', icon: <EarnIcon /> },
   { name: 'Tasks', icon: <TaskIcon /> },
   { name: 'Surveys', icon: <SurveyIcon /> },
+];
+
+const SIDEBAR_MENU_ITEMS_GAMES: SidebarMenuItem[] = [
+  { name: 'Boxes', icon: <BoxIcon /> },
+  { name: 'Battles', icon: <SwordIcon /> },
 ];
 
 const SIDEBAR_MENU_ITEMS_COMMUNITY: SidebarMenuItem[] = [
@@ -79,10 +84,10 @@ const Sidebar: React.FC = () => {
       ></div>
 
       <aside className={`bg-cyber-surface flex flex-col transition-all duration-300 ease-in-out border-r border-cyber-primary/20 overflow-hidden
-          fixed lg:sticky top-0 h-screen z-50 
-          lg:w-64 ${isSidebarCollapsed ? 'lg:w-0 lg:p-0' : ''}
-          ${isMobileSidebarOpen ? 'translate-x-0 w-64' : '-translate-x-full w-64 lg:translate-x-0'}
-      `}>
+            fixed lg:sticky top-0 h-screen z-50 
+            lg:w-64 ${isSidebarCollapsed ? 'lg:w-0 lg:p-0' : ''}
+            ${isMobileSidebarOpen ? 'translate-x-0 w-64' : '-translate-x-full w-64 lg:translate-x-0'}
+        `}>
           <div className="p-4 flex flex-col flex-1 min-w-[16rem] h-full overflow-y-auto">
               <div className="flex items-center justify-between mb-8">
                   <h1 className="text-2xl font-bold text-cyber-primary text-glow-primary font-orbitron">EarnLab</h1>
@@ -91,15 +96,27 @@ const Sidebar: React.FC = () => {
                   </button>
               </div>
 
-              <nav className="flex-1 flex flex-col">
+              <nav className="flex-1 flex flex-col space-y-4">
                   <ul className="space-y-1">
                       {SIDEBAR_MENU_ITEMS_TOP.map(renderMenuItem)}
                   </ul>
-                  <div className="border-t border-cyber-primary/20 my-4" />
-                   <ul className="space-y-1">
-                      {SIDEBAR_MENU_ITEMS_COMMUNITY.map(renderMenuItem)}
-                  </ul>
-                  <div className="border-t border-cyber-primary/20 my-4" />
+                  
+                  <div>
+                      <h3 className="px-4 text-xs font-semibold text-cyber-text-secondary/60 uppercase tracking-wider mb-2">Games</h3>
+                      <ul className="space-y-1">
+                          {SIDEBAR_MENU_ITEMS_GAMES.map(renderMenuItem)}
+                      </ul>
+                  </div>
+
+                  <div>
+                      <h3 className="px-4 text-xs font-semibold text-cyber-text-secondary/60 uppercase tracking-wider mb-2">Community</h3>
+                      <ul className="space-y-1">
+                          {SIDEBAR_MENU_ITEMS_COMMUNITY.map(renderMenuItem)}
+                      </ul>
+                  </div>
+                  
+                  <div className="flex-1"></div>
+                  
                   <ul className="space-y-1">
                       {SIDEBAR_MENU_ITEMS_BOTTOM.map(renderMenuItem)}
                   </ul>

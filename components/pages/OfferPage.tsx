@@ -18,11 +18,9 @@ const LockIcon: React.FC = () => (
 );
 
 const OfferProviderCard: React.FC<{ provider: OfferProvider }> = ({ provider }) => {
-    const { setCurrentPage } = useContext(AppContext);
-
     const handleClick = () => {
-        if (!provider.isLocked) {
-            setCurrentPage(provider.pageName);
+        if (!provider.isLocked && provider.pageName) {
+            window.open(`${window.location.origin}${window.location.pathname}?page=${encodeURIComponent(provider.pageName)}`, '_blank');
         }
     };
 

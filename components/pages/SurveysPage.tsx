@@ -47,11 +47,9 @@ const SurveysPage: React.FC = () => {
 };
 
 const SurveyProviderCard: React.FC<{provider: SurveyProvider}> = ({ provider }) => {
-    const { setCurrentPage } = useContext(AppContext);
-
     const handleClick = () => {
-        if (!provider.isLocked) {
-            setCurrentPage(provider.pageName);
+        if (!provider.isLocked && provider.pageName) {
+            window.open(`${window.location.origin}${window.location.pathname}?page=${encodeURIComponent(provider.pageName)}`, '_blank');
         }
     };
 
