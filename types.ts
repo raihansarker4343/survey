@@ -40,6 +40,16 @@ export interface SurveyProvider {
   unlockRequirement?: string;
 }
 
+export interface OfferProvider {
+  name: string;
+  logo: string;
+  pageName: string;
+  bonus?: string;
+  isLocked?: boolean;
+  unlockRequirement?: string;
+  unlocksAt?: string;
+}
+
 export interface SidebarMenuItem {
   name: string;
   icon: ReactNode;

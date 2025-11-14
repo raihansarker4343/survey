@@ -21,12 +21,30 @@ import AchievementsPage from './components/pages/AchievementsPage';
 import ChatPage from './components/pages/ChatPage';
 import SigninModal from './components/SigninModal';
 import SignupModal from './components/SignupModal';
+// Survey Pages
 import PrimeSurveysPage from './components/pages/survey/prime';
 import CpxResearchPage from './components/pages/survey/cpx';
 import AdscendMediaSurveysPage from './components/pages/survey/adscendmedia';
 import BitLabsSurveysPage from './components/pages/survey/bitlabs';
 import InBrainPage from './components/pages/survey/inbrain';
 import TheoremReachPage from './components/pages/survey/theoremreach';
+// Offer Pages
+import ToroxOffersPage from './components/pages/offers/torox';
+import AdscendMediaOffersPage from './components/pages/offers/adscendmedia';
+import AdToWallOffersPage from './components/pages/offers/adtowall';
+import RevUOffersPage from './components/pages/offers/revu';
+import AdGateMediaOffersPage from './components/pages/offers/adgatemedia';
+import MyChipsOffersPage from './components/pages/offers/mychips';
+import MMWallOffersPage from './components/pages/offers/mmwall';
+import AyeTStudiosOffersPage from './components/pages/offers/ayetstudios';
+import MonlixOffersPage from './components/pages/offers/monlix';
+import HangMyAdsOffersPage from './components/pages/offers/hangmyads';
+import LootablyOffersPage from './components/pages/offers/lootably';
+import TimeWallOffersPage from './components/pages/offers/timewall';
+import AdGemOffersPage from './components/pages/offers/adgem';
+import NotikOffersPage from './components/pages/offers/notik';
+import WannadsOffersPage from './components/pages/offers/wannads';
+import OfferToroOffersPage from './components/pages/offers/offertoro';
 
 export const AppContext = React.createContext<{
   isLoggedIn: boolean;
@@ -128,6 +146,7 @@ const App: React.FC = () => {
         return <div className={pagePadding}><AchievementsPage /></div>;
       case 'Chat':
         return <div className={pagePadding}><ChatPage /></div>;
+      // Survey Pages
       case 'Prime Surveys':
         return <div className={pagePadding}><PrimeSurveysPage /></div>;
       case 'CPX Research':
@@ -140,6 +159,39 @@ const App: React.FC = () => {
         return <div className={pagePadding}><InBrainPage /></div>;
       case 'TheoremReach':
         return <div className={pagePadding}><TheoremReachPage /></div>;
+      // Offer Pages
+      case 'Torox Offers':
+        return <div className={pagePadding}><ToroxOffersPage /></div>;
+      case 'Adscend Media Offers':
+        return <div className={pagePadding}><AdscendMediaOffersPage /></div>;
+      case 'AdToWall Offers':
+        return <div className={pagePadding}><AdToWallOffersPage /></div>;
+      case 'RevU Offers':
+        return <div className={pagePadding}><RevUOffersPage /></div>;
+      case 'AdGate Media Offers':
+        return <div className={pagePadding}><AdGateMediaOffersPage /></div>;
+      case 'MyChips Offers':
+        return <div className={pagePadding}><MyChipsOffersPage /></div>;
+      case 'MM Wall Offers':
+        return <div className={pagePadding}><MMWallOffersPage /></div>;
+      case 'Aye-T Studios Offers':
+        return <div className={pagePadding}><AyeTStudiosOffersPage /></div>;
+      case 'Monlix Offers':
+        return <div className={pagePadding}><MonlixOffersPage /></div>;
+      case 'Hang My Ads Offers':
+        return <div className={pagePadding}><HangMyAdsOffersPage /></div>;
+      case 'Lootably Offers':
+        return <div className={pagePadding}><LootablyOffersPage /></div>;
+      case 'Time Wall Offers':
+        return <div className={pagePadding}><TimeWallOffersPage /></div>;
+      case 'AdGem Offers':
+        return <div className={pagePadding}><AdGemOffersPage /></div>;
+      case 'Notik Offers':
+        return <div className={pagePadding}><NotikOffersPage /></div>;
+      case 'Wannads Offers':
+        return <div className={pagePadding}><WannadsOffersPage /></div>;
+      case 'OfferToro Offers':
+        return <div className={pagePadding}><OfferToroOffersPage /></div>;
       case 'Boxes':
       case 'Battles':
         // Placeholder for new pages

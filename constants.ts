@@ -1,4 +1,4 @@
-import type { User, EarningFeedItem, SurveyProvider, FaqItem, RewardOption, LeaderboardUser, Achievement, ChatMessage, Testimonial, FeaturedOffer } from './types';
+import type { User, EarningFeedItem, SurveyProvider, OfferProvider, FaqItem, RewardOption, LeaderboardUser, Achievement, ChatMessage, Testimonial, FeaturedOffer } from './types';
 
 export const MOCK_USER: User = {
   username: 'raihansarker',
@@ -32,12 +32,31 @@ export const EARNING_FEED_ITEMS: EarningFeedItem[] = [
 ];
 
 export const SURVEY_PROVIDERS: SurveyProvider[] = [
-  { name: 'Prime Surveys', logo: 'https://i.imgur.com/example_prime.png', type: 'Prime Insights', pageName: 'Prime Surveys' },
-  { name: 'CPX Research', logo: 'https://i.imgur.com/example_cpx.png', type: 'CPX RESEARCH', pageName: 'CPX Research' },
-  { name: 'Adscend Media Surveys', logo: 'https://i.imgur.com/example_adscend.png', type: 'AdscendMedia', pageName: 'Adscend Media Surveys' },
-  { name: 'BitLabs Surveys', logo: '', type: 'BitLabs', isLocked: true, unlockRequirement: 'Earn $2.50 to unlock', pageName: 'BitLabs Surveys' },
-  { name: 'inBrain', logo: '', type: 'inBrain', isLocked: true, unlockRequirement: 'Earn $2.50 to unlock', pageName: 'inBrain' },
-  { name: 'TheoremReach', logo: '', type: 'TheoremReach', isLocked: true, unlocksAt: 'Unlocks 12/2/2025, 12:16 PM', pageName: 'TheoremReach' },
+  { name: 'Prime Surveys', logo: 'https://i.imgur.com/N8lqs65.png', type: 'Prime Insights', pageName: 'Prime Surveys' },
+  { name: 'CPX Research', logo: 'https://i.imgur.com/bKj926D.png', type: 'CPX RESEARCH', pageName: 'CPX Research' },
+  { name: 'Adscend Media Surveys', logo: 'https://i.imgur.com/iY9g04E.png', type: 'AdscendMedia', pageName: 'Adscend Media Surveys' },
+  { name: 'BitLabs Surveys', logo: 'https://i.imgur.com/yvC5YyW.png', type: 'BitLabs', isLocked: true, unlockRequirement: 'Earn $2.50 to unlock', pageName: 'BitLabs Surveys' },
+  { name: 'inBrain', logo: 'https://i.imgur.com/yvC5YyW.png', type: 'inBrain', isLocked: true, unlockRequirement: 'Earn $2.50 to unlock', pageName: 'inBrain' },
+  { name: 'TheoremReach', logo: 'https://i.imgur.com/yvC5YyW.png', type: 'TheoremReach', isLocked: true, unlocksAt: 'Unlocks 12/2/2025, 12:16 PM', pageName: 'TheoremReach' },
+];
+
+export const OFFER_WALL_PROVIDERS: OfferProvider[] = [
+    { name: 'Torox', logo: 'https://i.imgur.com/Y17wQmd.png', bonus: '+80%', pageName: 'Torox Offers' },
+    { name: 'Adscend Media', logo: 'https://i.imgur.com/iY9g04E.png', bonus: '+50%', pageName: 'Adscend Media Offers' },
+    { name: 'AdToWall', logo: 'https://i.imgur.com/x0iP1C9.png', pageName: 'AdToWall Offers' },
+    { name: 'RevU', logo: 'https://i.imgur.com/yvC5YyW.png', isLocked: true, unlockRequirement: 'Earn $2.50 to unlock', bonus: '+50%', pageName: 'RevU Offers' },
+    { name: 'AdGate Media', logo: 'https://i.imgur.com/Q2yG7nS.png', pageName: 'AdGate Media Offers' },
+    { name: 'MyChips', logo: 'https://i.imgur.com/yvC5YyW.png', isLocked: true, unlockRequirement: 'Earn $2.50 to unlock', bonus: '+50%', pageName: 'MyChips Offers' },
+    { name: 'MM Wall', logo: 'https://i.imgur.com/6XzWfP1.png', pageName: 'MM Wall Offers' },
+    { name: 'Aye-T Studios', logo: 'https://i.imgur.com/J3t5e6E.png', pageName: 'Aye-T Studios Offers' },
+    { name: 'Monlix', logo: 'https://i.imgur.com/ePFr12w.png', pageName: 'Monlix Offers' },
+    { name: 'Hang My Ads', logo: 'https://i.imgur.com/yvC5YyW.png', isLocked: true, unlockRequirement: 'Earn $1.00 to unlock', pageName: 'Hang My Ads Offers' },
+    { name: 'Lootably', logo: 'https://i.imgur.com/i9nO27d.png', pageName: 'Lootably Offers' },
+    { name: 'Time Wall', logo: 'https://i.imgur.com/nJgq1t7.png', pageName: 'Time Wall Offers' },
+    { name: 'AdGem', logo: 'https://i.imgur.com/r9f5k2Z.png', pageName: 'AdGem Offers' },
+    { name: 'Notik', logo: 'https://i.imgur.com/yvC5YyW.png', pageName: 'Notik Offers' },
+    { name: 'Wannads', logo: 'https://i.imgur.com/yvC5YyW.png', pageName: 'Wannads Offers' },
+    { name: 'OfferToro', logo: 'https://i.imgur.com/yvC5YyW.png', pageName: 'OfferToro Offers' },
 ];
 
 export const FAQ_ITEMS: FaqItem[] = [

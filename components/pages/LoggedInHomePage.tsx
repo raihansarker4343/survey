@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../../App';
+import { OFFER_WALL_PROVIDERS } from '../../constants';
 
 // Mock data for the new sections
 const featuredTasks = [
@@ -14,29 +16,13 @@ const featuredSurveys = [
   { title: 'Qualification', duration: '1 minute' },
 ];
 
-const offerWalls = [
-    { name: 'Torox', logo: 'https://i.imgur.com/Y17wQmd.png', bonus: '+80%' },
-    { name: 'Adscend Media', logo: 'https://i.imgur.com/iY9g04E.png', bonus: '+50%' },
-    { name: 'AdToWall', logo: 'https://i.imgur.com/x0iP1C9.png' },
-    { name: 'RevU', logo: 'https://i.imgur.com/yvC5YyW.png', isLocked: true, unlockRequirement: 'Earn $2.50 to unlock', bonus: '+50%' },
-    { name: 'AdGate Media', logo: 'https://i.imgur.com/Q2yG7nS.png' },
-    { name: 'MyChips', logo: 'https://i.imgur.com/yvC5YyW.png', isLocked: true, unlockRequirement: 'Earn $2.50 to unlock', bonus: '+50%' },
-    { name: 'MM Wall', logo: 'https://i.imgur.com/6XzWfP1.png' },
-    { name: 'Aye-T Studios', logo: 'https://i.imgur.com/J3t5e6E.png' },
-    { name: 'Monlix', logo: 'https://i.imgur.com/ePFr12w.png' },
-    { name: 'Hang My Ads', logo: 'https://i.imgur.com/yvC5YyW.png', isLocked: true, unlockRequirement: 'Earn $1.00 to unlock' },
-    { name: 'Lootably', logo: 'https://i.imgur.com/i9nO27d.png' },
-    { name: 'Time Wall', logo: 'https://i.imgur.com/nJgq1t7.png' },
-    { name: 'AdGem', logo: 'https://i.imgur.com/r9f5k2Z.png' },
-];
-
 const surveyWalls = [
-    { name: 'Prime Surveys', logo: 'https://i.imgur.com/N8lqs65.png' },
-    { name: 'CPX Research', logo: 'https://i.imgur.com/bKj926D.png' },
-    { name: 'Adscend Media Surveys', logo: 'https://i.imgur.com/iY9g04E.png' },
-    { name: 'BitLabs Surveys', logo: 'https://i.imgur.com/yvC5YyW.png', isLocked: true, unlockRequirement: 'Earn $2.50 to unlock' },
-    { name: 'InBrain', logo: 'https://i.imgur.com/yvC5YyW.png', isLocked: true, unlockRequirement: 'Earn $2.50 to unlock' },
-    { name: 'TheoremReach', logo: 'https://i.imgur.com/yvC5YyW.png', isLocked: true, unlocksAt: 'Unlocks 12/2/2025, 12:16 PM' },
+    { name: 'Prime Surveys', logo: 'https://i.imgur.com/N8lqs65.png', pageName: 'Prime Surveys' },
+    { name: 'CPX Research', logo: 'https://i.imgur.com/bKj926D.png', pageName: 'CPX Research' },
+    { name: 'Adscend Media Surveys', logo: 'https://i.imgur.com/iY9g04E.png', pageName: 'Adscend Media Surveys' },
+    { name: 'BitLabs Surveys', logo: 'https://i.imgur.com/yvC5YyW.png', isLocked: true, unlockRequirement: 'Earn $2.50 to unlock', pageName: 'BitLabs Surveys' },
+    { name: 'inBrain', logo: 'https://i.imgur.com/yvC5YyW.png', isLocked: true, unlockRequirement: 'Earn $2.50 to unlock', pageName: 'inBrain' },
+    { name: 'TheoremReach', logo: 'https://i.imgur.com/yvC5YyW.png', isLocked: true, unlocksAt: 'Unlocks 12/2/2025, 12:16 PM', pageName: 'TheoremReach' },
 ];
 
 const SectionHeader: React.FC<{ title: string, description: string }> = ({ title, description }) => (
@@ -58,6 +44,8 @@ const StarIcon: React.FC = () => (
 );
 
 const LoggedInHomePage: React.FC = () => {
+    const { setCurrentPage } = useContext(AppContext);
+
     return (
         <div className="space-y-12">
             {/* Top Banners */}
@@ -104,24 +92,42 @@ const LoggedInHomePage: React.FC = () => {
             <section>
                 <SectionHeader title="Offer Walls" description="Each offer wall contains hundreds of offers to complete" />
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                     {offerWalls.map((wall, index) => (
-                        <div key={index} className={`cyber-panel p-4 flex flex-col items-center justify-center text-center h-36 relative overflow-hidden transition-all duration-300 ${!wall.isLocked && 'hover:bg-cyber-primary/10 cursor-pointer hover:-translate-y-1 hover:border-cyber-primary'}`}>
-                            {wall.isLocked && <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-10"></div>}
-                            {wall.bonus && <div className={`absolute top-2 right-2 text-xs font-bold px-2 py-0.5 rounded-full z-20 ${wall.isLocked ? 'bg-gray-500/30 text-gray-300' : 'bg-cyber-accent/20 text-cyber-accent'}`}>{wall.bonus}</div>}
-                            
-                            <div className={`relative flex flex-col items-center justify-center flex-1 ${wall.isLocked ? 'opacity-30' : ''}`}>
-                                <img src={wall.logo} alt={wall.name} className="h-10 max-w-full object-contain mb-2 invert-[.85] saturate-0 contrast-200" />
-                                <p className="font-semibold text-cyber-text-primary text-sm mt-auto">{wall.name}</p>
-                            </div>
-                             
-                            {wall.isLocked && (
-                                <div className="absolute inset-0 flex flex-col items-center justify-center text-sm text-center z-20 p-2 text-white">
-                                    <LockIcon />
-                                    {wall.unlockRequirement && <p className="mt-1 font-semibold">{wall.unlockRequirement}</p>}
+                     {OFFER_WALL_PROVIDERS.map((wall, index) => {
+                         const CardContent = (
+                            <>
+                                {wall.isLocked && <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-10"></div>}
+                                {wall.bonus && <div className={`absolute top-2 right-2 text-xs font-bold px-2 py-0.5 rounded-full z-20 ${wall.isLocked ? 'bg-gray-500/30 text-gray-300' : 'bg-cyber-accent/20 text-cyber-accent'}`}>{wall.bonus}</div>}
+                                
+                                <div className={`relative flex flex-col items-center justify-center flex-1 ${wall.isLocked ? 'opacity-30' : ''}`}>
+                                    <img src={wall.logo} alt={wall.name} className="h-10 max-w-full object-contain mb-2 invert-[.85] saturate-0 contrast-200" />
+                                    <p className="font-semibold text-cyber-text-primary text-sm mt-auto">{wall.name}</p>
                                 </div>
-                            )}
-                        </div>
-                    ))}
+                                
+                                {wall.isLocked && (
+                                    <div className="absolute inset-0 flex flex-col items-center justify-center text-sm text-center z-20 p-2 text-white">
+                                        <LockIcon />
+                                        {wall.unlockRequirement && <p className="mt-1 font-semibold">{wall.unlockRequirement}</p>}
+                                    </div>
+                                )}
+                            </>
+                         );
+
+                         const commonClasses = "cyber-panel p-4 flex flex-col items-center justify-center text-center h-36 relative overflow-hidden transition-all duration-300";
+
+                         if (wall.isLocked) {
+                            return <div key={index} className={commonClasses}>{CardContent}</div>;
+                         }
+
+                         return (
+                            <button
+                                key={index}
+                                onClick={() => wall.pageName && setCurrentPage(wall.pageName)}
+                                className={`${commonClasses} hover:bg-cyber-primary/10 cursor-pointer hover:-translate-y-1 hover:border-cyber-primary`}
+                            >
+                                {CardContent}
+                            </button>
+                         )
+                    })}
                 </div>
             </section>
 
@@ -129,24 +135,44 @@ const LoggedInHomePage: React.FC = () => {
             <section>
                 <SectionHeader title="Survey Walls" description="Each survey wall contains hundreds of surveys to complete" />
                 <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
-                     {surveyWalls.map((wall, index) => (
-                        <div key={index} className={`cyber-panel p-4 flex flex-col items-center justify-center text-center h-32 relative overflow-hidden transition-all duration-300 ${!wall.isLocked && 'hover:bg-cyber-primary/10 cursor-pointer hover:-translate-y-1 hover:border-cyber-primary'}`}>
-                             {wall.isLocked && <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-10"></div>}
-                             
-                             <div className={`relative flex flex-col items-center justify-center flex-1 ${wall.isLocked ? 'opacity-30' : ''}`}>
-                                 <img src={wall.logo} alt={wall.name} className="h-8 max-w-full object-contain mb-2 invert-[.85] saturate-0 contrast-200" />
-                                 <p className="font-semibold text-cyber-text-primary text-sm mt-auto">{wall.name}</p>
-                             </div>
-                             
-                             {wall.isLocked && (
-                                <div className="absolute inset-0 flex flex-col items-center justify-center text-xs text-center z-20 p-2 text-white">
-                                     <LockIcon />
-                                     {wall.unlockRequirement && <p className="mt-1 font-semibold">{wall.unlockRequirement}</p>}
-                                     {wall.unlocksAt && <p className="mt-1">{wall.unlocksAt}</p>}
+                     {surveyWalls.map((wall, index) => {
+                        const isLocked = wall.isLocked;
+
+                        const CardContent = (
+                            <>
+                                {isLocked && <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-10"></div>}
+                                
+                                <div className={`relative flex flex-col items-center justify-center flex-1 ${isLocked ? 'opacity-30' : ''}`}>
+                                    <img src={wall.logo} alt={wall.name} className="h-8 max-w-full object-contain mb-2 invert-[.85] saturate-0 contrast-200" />
+                                    <p className="font-semibold text-cyber-text-primary text-sm mt-auto">{wall.name}</p>
                                 </div>
-                             )}
-                         </div>
-                    ))}
+                                
+                                {isLocked && (
+                                   <div className="absolute inset-0 flex flex-col items-center justify-center text-xs text-center z-20 p-2 text-white">
+                                        <LockIcon />
+                                        {wall.unlockRequirement && <p className="mt-1 font-semibold">{wall.unlockRequirement}</p>}
+                                        {wall.unlocksAt && <p className="mt-1">{wall.unlocksAt}</p>}
+                                   </div>
+                                )}
+                            </>
+                        );
+
+                        const commonClasses = "cyber-panel p-4 flex flex-col items-center justify-center text-center h-32 relative overflow-hidden transition-all duration-300";
+
+                        if (isLocked) {
+                            return <div key={index} className={commonClasses}>{CardContent}</div>;
+                        }
+
+                        return (
+                            <button
+                                key={index}
+                                onClick={() => wall.pageName && setCurrentPage(wall.pageName)}
+                                className={`${commonClasses} hover:bg-cyber-primary/10 cursor-pointer hover:-translate-y-1 hover:border-cyber-primary`}
+                            >
+                                {CardContent}
+                            </button>
+                        );
+                     })}
                 </div>
             </section>
 
