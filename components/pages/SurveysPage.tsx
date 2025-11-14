@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { SURVEY_PROVIDERS } from '../../constants';
 import type { SurveyProvider } from '../../types';
 import { StarIcon, LockIcon } from '../icons/SurveyIcons';
+import { AppContext } from '../../App';
 
 const SurveysPage: React.FC = () => {
     return (
@@ -46,8 +47,16 @@ const SurveysPage: React.FC = () => {
 };
 
 const SurveyProviderCard: React.FC<{provider: SurveyProvider}> = ({ provider }) => {
-    return (
-        <div className={`cyber-panel p-4 text-center flex flex-col items-center justify-center h-40 relative overflow-hidden transition-all duration-300 ${provider.isLocked ? '' : 'hover:bg-cyber-primary/10 cursor-pointer hover:-translate-y-1 hover:border-cyber-primary'}`}>
+    const { setCurrentPage } = useContext(AppContext);
+
+    const handleClick = () => {
+        if (!provider.isLocked) {
+            setCurrentPage(provider.pageName);
+        }
+    };
+
+    const CardContent = (
+        <>
             {provider.isLocked && <div className="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>}
             
             <div className={`relative z-10 flex flex-col items-center justify-center ${provider.isLocked ? 'opacity-30' : ''}`}>
@@ -62,7 +71,22 @@ const SurveyProviderCard: React.FC<{provider: SurveyProvider}> = ({ provider }) 
                     {provider.unlocksAt && <p className="mt-1">{provider.unlocksAt}</p>}
                 </div>
             )}
-        </div>
+        </>
+    );
+    
+    const commonClasses = "cyber-panel p-4 text-center flex flex-col items-center justify-center h-40 relative overflow-hidden transition-all duration-300";
+
+    if (provider.isLocked) {
+        return <div className={commonClasses}>{CardContent}</div>;
+    }
+
+    return (
+        <button 
+            onClick={handleClick}
+            className={`${commonClasses} hover:bg-cyber-primary/10 cursor-pointer hover:-translate-y-1 hover:border-cyber-primary`}
+        >
+            {CardContent}
+        </button>
     );
 }
 

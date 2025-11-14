@@ -34,6 +34,7 @@ export interface SurveyProvider {
   name: string;
   logo: string;
   type: string;
+  pageName: string;
   isLocked?: boolean;
   unlocksAt?: string;
   unlockRequirement?: string;

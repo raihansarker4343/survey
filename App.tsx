@@ -21,6 +21,12 @@ import AchievementsPage from './components/pages/AchievementsPage';
 import ChatPage from './components/pages/ChatPage';
 import SigninModal from './components/SigninModal';
 import SignupModal from './components/SignupModal';
+import PrimeSurveysPage from './components/pages/survey/prime';
+import CpxResearchPage from './components/pages/survey/cpx';
+import AdscendMediaSurveysPage from './components/pages/survey/adscendmedia';
+import BitLabsSurveysPage from './components/pages/survey/bitlabs';
+import InBrainPage from './components/pages/survey/inbrain';
+import TheoremReachPage from './components/pages/survey/theoremreach';
 
 export const AppContext = React.createContext<{
   isLoggedIn: boolean;
@@ -122,6 +128,18 @@ const App: React.FC = () => {
         return <div className={pagePadding}><AchievementsPage /></div>;
       case 'Chat':
         return <div className={pagePadding}><ChatPage /></div>;
+      case 'Prime Surveys':
+        return <div className={pagePadding}><PrimeSurveysPage /></div>;
+      case 'CPX Research':
+        return <div className={pagePadding}><CpxResearchPage /></div>;
+      case 'Adscend Media Surveys':
+        return <div className={pagePadding}><AdscendMediaSurveysPage /></div>;
+      case 'BitLabs Surveys':
+        return <div className={pagePadding}><BitLabsSurveysPage /></div>;
+      case 'inBrain':
+        return <div className={pagePadding}><InBrainPage /></div>;
+      case 'TheoremReach':
+        return <div className={pagePadding}><TheoremReachPage /></div>;
       case 'Boxes':
       case 'Battles':
         // Placeholder for new pages
