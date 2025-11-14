@@ -162,8 +162,13 @@ const getPageComponent = (pageName: string) => {
 }
 
 const App: React.FC = () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const dedicatedPageName = urlParams.get('dedicatedPage');
+  const path = window.location.pathname;
+  const pathSegments = path.split('/').filter(Boolean);
+  let dedicatedPageName: string | null = null;
+
+  if ((pathSegments[0] === 'survey' || pathSegments[0] === 'offers') && pathSegments.length === 2) {
+    dedicatedPageName = pathSegments[1];
+  }
   
   const [isLoggedIn, setIsLoggedIn] = useState(() => localStorage.getItem('isLoggedIn') === 'true');
   const [user] = useState<User | null>(MOCK_USER);
