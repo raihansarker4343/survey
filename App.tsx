@@ -84,61 +84,9 @@ export const AppContext = React.createContext<{
   setIsMobileSidebarOpen: () => {},
 });
 
-const App: React.FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(() => localStorage.getItem('isLoggedIn') === 'true');
-  const [user] = useState<User | null>(MOCK_USER);
-  const [balance, setBalance] = useState(125.50);
-  const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
-  const [isSigninModalOpen, setIsSigninModalOpen] = useState(false);
-  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
-  const [signupInitialEmail, setSignupInitialEmail] = useState('');
-  
-  const [currentPage, setCurrentPage] = useState(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('page') || 'Home';
-  });
-
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-
-  useEffect(() => {
-    if (isLoggedIn) {
-        localStorage.setItem('isLoggedIn', 'true');
-    } else {
-        localStorage.removeItem('isLoggedIn');
-    }
-  }, [isLoggedIn]);
-
-  const handleLogin = useCallback(() => {
-    setIsLoggedIn(true);
-    setCurrentPage('Home');
-    setIsSigninModalOpen(false);
-    setIsSignupModalOpen(false);
-  }, []);
-
-  const handleLogout = useCallback(() => {
-    setIsLoggedIn(false);
-    setCurrentPage('Home'); // Reset to home on logout
-  }, []);
-
-  const openSignupModal = (email = '') => {
-      setSignupInitialEmail(email);
-      setIsSignupModalOpen(true);
-  };
-
-  const switchToSignup = () => {
-      setIsSigninModalOpen(false);
-      setIsSignupModalOpen(true);
-  };
-
-  const switchToSignin = () => {
-      setIsSignupModalOpen(false);
-      setIsSigninModalOpen(true);
-  };
-  
-  const renderPage = () => {
+const getPageComponent = (pageName: string) => {
     const pagePadding = "p-4 sm:p-6 lg:p-8";
-    switch (currentPage) {
+    switch (pageName) {
       case 'Home':
         return <div className={pagePadding}><LoggedInHomePage /></div>;
       case 'Profile':
@@ -207,18 +155,85 @@ const App: React.FC = () => {
         return <div className={pagePadding}><OfferToroOffersPage /></div>;
       case 'Boxes':
       case 'Battles':
-        // Placeholder for new pages
-        return <div className={`text-cyber-text-primary text-3xl font-bold ${pagePadding}`}>{currentPage} Page</div>;
+        return <div className={`text-cyber-text-primary text-3xl font-bold ${pagePadding}`}>{pageName} Page</div>;
       default:
         return <div className={pagePadding}><LoggedInHomePage /></div>;
     }
+}
+
+const App: React.FC = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const dedicatedPageName = urlParams.get('dedicatedPage');
+  
+  const [isLoggedIn, setIsLoggedIn] = useState(() => localStorage.getItem('isLoggedIn') === 'true');
+  const [user] = useState<User | null>(MOCK_USER);
+  const [balance, setBalance] = useState(125.50);
+  const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
+  const [isSigninModalOpen, setIsSigninModalOpen] = useState(false);
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
+  const [signupInitialEmail, setSignupInitialEmail] = useState('');
+  
+  const [currentPage, setCurrentPage] = useState('Home');
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+        localStorage.setItem('isLoggedIn', 'true');
+    } else {
+        localStorage.removeItem('isLoggedIn');
+    }
+  }, [isLoggedIn]);
+
+  const handleLogin = useCallback(() => {
+    setIsLoggedIn(true);
+    setCurrentPage('Home');
+    setIsSigninModalOpen(false);
+    setIsSignupModalOpen(false);
+  }, []);
+
+  const handleLogout = useCallback(() => {
+    setIsLoggedIn(false);
+    setCurrentPage('Home'); // Reset to home on logout
+  }, []);
+
+  const openSignupModal = (email = '') => {
+      setSignupInitialEmail(email);
+      setIsSignupModalOpen(true);
+  };
+
+  const switchToSignup = () => {
+      setIsSigninModalOpen(false);
+      setIsSignupModalOpen(true);
+  };
+
+  const switchToSignin = () => {
+      setIsSignupModalOpen(false);
+      setIsSigninModalOpen(true);
   };
   
+  const appContextValue = {
+    isLoggedIn, user, balance, setBalance, setIsLoggedIn, isWalletModalOpen, setIsWalletModalOpen, 
+    isSigninModalOpen, setIsSigninModalOpen, isSignupModalOpen, openSignupModal, 
+    currentPage, setCurrentPage, isSidebarCollapsed, setIsSidebarCollapsed, 
+    isMobileSidebarOpen, setIsMobileSidebarOpen
+  };
+  
+  if (dedicatedPageName) {
+    return (
+      <AppContext.Provider value={appContextValue}>
+        <div className="bg-cyber-bg text-cyber-text-primary min-h-screen">
+          {getPageComponent(dedicatedPageName)}
+        </div>
+      </AppContext.Provider>
+    )
+  }
+
   const headerContent = isLoggedIn ? <Header onLogout={handleLogout} /> : <LoggedOutHeader />;
-  const mainContent = isLoggedIn ? renderPage() : <HomePageContent />;
+  const mainContent = isLoggedIn ? getPageComponent(currentPage) : <HomePageContent />;
 
   return (
-    <AppContext.Provider value={{ isLoggedIn, user, balance, setBalance, setIsLoggedIn, isWalletModalOpen, setIsWalletModalOpen, isSigninModalOpen, setIsSigninModalOpen, isSignupModalOpen, openSignupModal, currentPage, setCurrentPage, isSidebarCollapsed, setIsSidebarCollapsed, isMobileSidebarOpen, setIsMobileSidebarOpen }}>
+    <AppContext.Provider value={appContextValue}>
       <div className="flex h-screen bg-cyber-bg text-cyber-text-primary">
         {isLoggedIn ? <Sidebar /> : <LoggedOutSidebar />}
         <div className="flex-1 flex flex-col min-w-0 overflow-y-auto scanlines">

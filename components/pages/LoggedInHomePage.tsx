@@ -17,10 +17,10 @@ const featuredSurveys = [
 ];
 
 const surveyWalls = [
-    { name: 'Prime Surveys', logo: 'https://i.imgur.com/N8lqs65.png', pageName: 'Prime Surveys' },
-    { name: 'CPX Research', logo: 'https://i.imgur.com/bKj926D.png', pageName: 'CPX Research' },
-    { name: 'Adscend Media Surveys', logo: 'https://i.imgur.com/iY9g04E.png', pageName: 'Adscend Media Surveys' },
-    { name: 'BitLabs Surveys', logo: 'https://i.imgur.com/yvC5YyW.png', isLocked: true, unlockRequirement: 'Earn $2.50 to unlock', pageName: 'BitLabs Surveys' },
+    { name: 'Prime Surveys', logo: 'https://i.imgur.com/N8lqs65.png', pageName: 'Prime' },
+    { name: 'CPX Research', logo: 'https://i.imgur.com/bKj926D.png', pageName: 'CPX' },
+    { name: 'Adscend Media Surveys', logo: 'https://i.imgur.com/iY9g04E.png', pageName: 'AdscendSurveys' },
+    { name: 'BitLabs Surveys', logo: 'https://i.imgur.com/yvC5YyW.png', isLocked: true, unlockRequirement: 'Earn $2.50 to unlock', pageName: 'BitLabs' },
     { name: 'inBrain', logo: 'https://i.imgur.com/yvC5YyW.png', isLocked: true, unlockRequirement: 'Earn $2.50 to unlock', pageName: 'inBrain' },
     { name: 'TheoremReach', logo: 'https://i.imgur.com/yvC5YyW.png', isLocked: true, unlocksAt: 'Unlocks 12/2/2025, 12:16 PM', pageName: 'TheoremReach' },
 ];
@@ -119,7 +119,7 @@ const LoggedInHomePage: React.FC = () => {
                          return (
                             <button
                                 key={index}
-                                onClick={() => wall.pageName && window.open(`${window.location.origin}${window.location.pathname}?page=${encodeURIComponent(wall.pageName)}`, '_blank')}
+                                onClick={() => wall.pageName && window.open(`${window.location.origin}${window.location.pathname}?dedicatedPage=${encodeURIComponent(wall.pageName)}`, '_blank')}
                                 className={`${commonClasses} hover:bg-cyber-primary/10 cursor-pointer hover:-translate-y-1 hover:border-cyber-primary`}
                             >
                                 {CardContent}
@@ -164,7 +164,7 @@ const LoggedInHomePage: React.FC = () => {
                         return (
                             <button
                                 key={index}
-                                onClick={() => wall.pageName && window.open(`${window.location.origin}${window.location.pathname}?page=${encodeURIComponent(wall.pageName)}`, '_blank')}
+                                onClick={() => wall.pageName && window.open(`${window.location.origin}${window.location.pathname}?dedicatedPage=${encodeURIComponent(wall.pageName)}`, '_blank')}
                                 className={`${commonClasses} hover:bg-cyber-primary/10 cursor-pointer hover:-translate-y-1 hover:border-cyber-primary`}
                             >
                                 {CardContent}

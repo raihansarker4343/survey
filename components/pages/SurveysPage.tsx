@@ -49,7 +49,7 @@ const SurveysPage: React.FC = () => {
 const SurveyProviderCard: React.FC<{provider: SurveyProvider}> = ({ provider }) => {
     const handleClick = () => {
         if (!provider.isLocked && provider.pageName) {
-            window.open(`${window.location.origin}${window.location.pathname}?page=${encodeURIComponent(provider.pageName)}`, '_blank');
+            window.open(`${window.location.origin}${window.location.pathname}?dedicatedPage=${encodeURIComponent(provider.pageName)}`, '_blank');
         }
     };
 
